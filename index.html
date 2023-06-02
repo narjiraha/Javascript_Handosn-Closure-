@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure Handson</title>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <h3>Q.1
+        <pre>
+    " function counter(){
+    var counter = 0;
+    
+    function IncreaseCounter() {
+    return counter += 1;
+    };
+    
+    return IncreaseCounter;
+    }
+    
+    var counter = counter();
+    alert(counter());
+    alert(counter());
+    alert(counter());
+    alert(counter());"
+
+    ANS:1, 2, 3, 4
+
+    Explanation:This programme defines the counter() function, which returns the IncreaseCounter() function. The counter() method
+    provides a closure that enables the IncreaseCounter() function to read and alter the counter variable while initialising
+    a counter variable to zero.
+    Every time it is called, the IncreaseCounter() method adds one to the counter variable's current value and returns it.
+</h3></pre>
+
+        <h3>Q.2/
+            <pre>
+            "let count = 0;
+            (function () {
+            if (count === 0) {
+            let count = 1;
+            console.log(count); // What is logged?
+            }
+            console.log(count); // What is logged?
+            })();"
+
+            ANS: 1, 0
+            Explanation: I have created one variable with count 0.
+            The if statement determines whether the outer count variable's value equals zero. If it is, the let keyword, which
+            defines a new block-scoped variable, is used to declare a new variable inside the block with the same name, count. It is
+            decided to give this new count variable a value of 1. The new count variable's value, 1, is printed by the console.log()
+            command inside the if block.
+            The value of the outer count variable is output after the if block, and it is still set to 0, as the inner count
+            variable within the if block only lives within that block and has no effect on the outer count variable.
+            
+            Following the IIFE's implementation, the code outputs 1 and 0 to the console.
+    </pre>
+        </h3>
+
+        <h3>Q.3/
+            <pre>
+           "for (var i = 0; i < 3; i++)
+            { 
+            setTimeout(function log() 
+            { 
+                console.log(i); // What is logged?
+             }, 1000); }"
+
+          
+            ANS: 3, 3, 3
+
+            Explanation:
+            When this code is run, a loop is set up that iterates three times, each time increasing the value of the
+            variable i by
+            one. With a delay of 1000 milliseconds and the function log() as its parameter, the setTimeout() function is
+            called
+            inside the loop.
+            All three function calls are executed after the loop has ended and i has been increased to a final value of
+            3, as each
+            setTimeout() call is postponed by 1000 milliseconds. As a result, each time the log() method is used, the
+            value of i,
+            which is always 3, is logged.
+
+            As a result, when this code is run, the number 3 is logged to the console three times, each time with a
+            delay of 1000
+            milliseconds.
+            </pre>
+        </h3>
+
+        <h3>Q.4 Write a code to calculate area of a rectangle using inner function. In this case outer function should
+            accept parameter
+            length and inner function should accept parameter breadth.
+            <pre>
+            ANS:
+            function OuterFunction(L) {
+            function InerFunction(B) {
+            console.log(`Area: ${L * B}`)
+            }
+            InerFunction(10);
+            }
+            OuterFunction(20);
+
+            Output: 200
+
+            Explanation:
+            The function OuterFunction, which has the parameter L, is defined in this code. There is a function called InnerFunction
+            defined inside the OuterFunction that only accepts the parameter B. The InnerFunction uses the formula L * B to get the
+            area of a rectangle, where L is the rectangle's length and B is its width.
+            The InnerFunction is called from the OuterFunction with the parameter value of 10. L can be accessed by both the
+            InnerFunction and the B parameter because it is already declared in the OuterFunction's scope. In this instance, L is 20
+            and B is 10, so the InnerFunction determines the area of a rectangle with these dimensions: 200.
+            </pre>
+        </h3>
+
+        <h3>Q.5/Take a variable in outer function and create an inner function to increase the counter every time it is
+            called
+            <pre>
+        function outerFunction() {
+        let counter = 0;
+
+        function innerFunction() {
+        counter++;
+        console.log(`Counter value: ${counter}`);
+      }
+
+       return innerFunction;
+      }
+
+      const incrementCounter = outerFunction() ;
+      incrementCounter(); // Output: Counter value: 1
+      incrementCounter(); // Output: Counter value: 2
+      incrementCounter(); // Output: Counter value: 3
+
+    ANS: 1 2 3 4 
+
+    Explanation:
+    This code creates the outerFunction function, which returns the innerFunction function.
+    
+    The innerFunction function, which is defined by the outerFunction function, increments the counter local variable by 1
+    each time it is called and logs the new value of counter to the console. The outerFunction function initialises the
+    counter local variable to zero.
+    
+    Following the function call, the innerFunction function is returned by the outerFunction function.
+
+    Also, a new variable called incrementCounter is created and given the return value of the outerFunction() call in the
+    code. As a result, incrementCounter is currently referring to the innerFunction function, which has a separate counter
+    variable and is defined inside outerFunction.
+    
+    The code then uses incrementCounter() four times, executing the innerFunction function each time and raising the counter
+    variable's value by 1. As a result, the output is 1, 2, 3, and 4 each time the value of counter is recorded to the
+    console.
+    </pre>
+        </h3>
+
+        <h3>Q.6/
+            <pre>
+        "Print Output
+        
+        var a = 12;
+        (function () {
+        alert(a);
+        })();"
+         
+        ANS:12
+
+        Explanation:
+        With this code, a is created and its value is set to 12.
+        
+        After that, an anonymous function is defined and called immediately by including it in parentheses and adding ().
+        
+        The value of the variable an is given inside the anonymous function. The user is informed of the value of the global
+        variable a, which is 12 when the anonymous function is called.
+
+        </pre>
+        </h3>
+
+        <h3>Q.7/
+            <pre>
+                "var a = 10;
+                var x = (function () {
+                var a = 12;
+                return function () {
+                alert(a);
+                };
+                })();
+                x();"
+
+                ANS:12
+
+                Explanation:
+                The two variables a and x are created by.
+                
+                The value of x is set to the result of using an anonymous function, and the variable an is set to 10.
+                
+                An anonymous function creates a new variable called a, sets it to the value 12, and then returns a function that logs
+                the value of a to the console.
+                
+                The variable x has the returning function allocated to it. When x() is called, the function is run and the variable a's
+                value, 12, is logged to the console.
+                
+                The function returned by the anonymous function has access to the variable a declared within the anonymous function's
+                scope rather than the global variable a, which is why 12 is logged instead of 10 in the output.
+
+            </pre>
+        </h3>
+
+        <h3>Q.8
+            <pre>
+    "var globalVar = ""xyz"";
+
+    (function outerFunc(outerArg) {
+    var outerVar = 'a';
+
+    (function innerFunc(innerArg) {
+    var innerVar = 'b';
+
+    console.log(
+    ""outerArg = "" + outerArg + ""\n"" +
+    ""innerArg = "" + innerArg + ""\n"" +
+    ""outerVar = "" + outerVar + ""\n"" +
+    ""innerVar = "" + innerVar + ""\n"" +
+    ""globalVar = "" + globalVar);
+
+    })(456);
+    })(123);"
+
+
+                Ans:outerArg = 123
+                innerArg = 456
+                outerVar = a
+                innerVar = b
+                globalVar = xyz
+
+                Explanation:
+                var globalVar = "xyz";: Declares and initialises a global variable called globalVar with the value "xyz."
+                
+                (func outerFunc(outerArg)...)(123);: This is an immediately-invoked function expression (IIFE) with the parameter 123
+                that takes an argument outerArg and is called immediately. Within this function:
+                
+                a. var outerVar = 'a';: Declares and sets the value 'a' to a local variable outerVar.
+                
+                (function innerFunc(innerArg)...)(456);: Another IIFE defined within the outerFunc. It accepts an argument innerArg and
+                is invoked immediately with the argument 456. Within this internal function:
+                
+                i. var innerVar = 'b';: Declares and sets the value 'b' to a local variable innerVar.
+                
+                ii. console.log(...);: This line prints to the console the following values:
+                - `"outerArg = " + outerArg`: Displays the value of the `outerArg` parameter, which is `123`.
+                - `"innerArg = " + innerArg`: Displays the value of the `innerArg` parameter, which is `456`.
+                - `"outerVar = " + outerVar`: Displays the value of the `outerVar` variable, which is `'a'`.
+                - `"innerVar = " + innerVar`: Displays the value of the `innerVar` variable, which is `'b'`.
+                - `"globalVar = " + globalVar`: Displays the value of the `globalVar` variable, which is `'xyz'`.
+
+                Therefore, the output of the code will be:
+                outerArg = 123
+                innerArg = 456
+                outerVar = a
+                innerVar = b
+                globalVar = xyz
+
+            </pre>
+        </h3>
+</body>
+
+</html>
